@@ -12,21 +12,40 @@ const largeBreakTime = 15;
 
 export default function App() {
 
-  const [timer, setTimer] = useState(workTime);
+  const [minuteTimer, setMinuteTimer] = useState(workTime);
+  const [secondTimer, setSecondTimer] = useState(0);
 
-  function Timer() {
-    useEffect(() => {
-       counter = workTime;
+  const Timer = () => {
+    
+      let minute = workTime;
+
+      let second = 0;
 
       let oneSecInterval = setInterval(() => {
-        console.log(counter +'sec.');
-        counter--;
-        setTimer(counter);
-        if (counter < 0) {
+        console.log(second +'sec.');
+        
+        
+        
+        
+        
+        second--;
+        
+        if (second < 0){
+          setSecondTimer(0)
+        } else {
+          setSecondTimer(second);
+        }
+        
+        if (second < 0 & minute > 0 ) {
+          minute--;
+          setMinuteTimer(minute);
+          second = 59;
+          setSecondTimer(second);
+        } else if(second <= 0 && minute <= 0) {
           clearInterval(oneSecInterval);
         }
       }, 1000);
-    }, []);
+    
   }
 
   //Timer();
@@ -36,12 +55,12 @@ export default function App() {
       <OptionButton />
       <Text style={styles.title}>Momo Timer</Text>
       <Text style={styles.subtitle}>Work like no one has before.</Text>
-      <Text style={styles.timerDisplay}>{timer}:00</Text>
+      <Text style={styles.timerDisplay}>{minuteTimer}:{secondTimer<10 ? '0' + secondTimer : secondTimer}</Text>
       
       <Text>Dots</Text>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.startButton}>
+        <TouchableOpacity style={styles.startButton} onPress={() => {Timer();}}>
           <Text style={styles.startButtonText}>Start</Text>
         </TouchableOpacity>
 
