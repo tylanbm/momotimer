@@ -1,11 +1,12 @@
-import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import React from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const OptionButton = () => {
     return (
         <View>
             <TouchableOpacity>
-                <Text>Options</Text>
+                <Ionicons name='menu-outline' size={32}/>
             </TouchableOpacity>
         </View>
     )
